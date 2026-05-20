@@ -1,0 +1,76 @@
+<div class="container">
+  <h1>Productos</h1>
+  <div class="card">
+    <div class="card-body">
+      <!-- Boton oculto -->
+      <input type="hidden" id="idProducto" [(ngModel)]="producto.id" />
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          placeholder="Ingrese el nombre"
+          [(ngModel)]="producto.nombre"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input
+          type="number"
+          class="form-control"
+          id="precio"
+          placeholder="Ingrese el precio"
+          [(ngModel)]="producto.precio"
+        />
+      </div>
+      <div>
+        <label class="form-label">Categoría</label>
+
+        <select class="form-select form-select-sm w-auto" [(ngModel)]="producto.categoria">
+          <option>Bebidas</option>
+          <option>Herramienta</option>
+          <option>Material</option>
+          <option>Electrónica</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-success mt-4" (click)="guardar()">
+        {{ enEdicion ? 'Editar' : 'Guardar' }}
+      </button>
+      <table class="table table-bordered table-sm mt-4">
+        <thead>
+          <tr class="table-active">
+            <th scope="col" class="text-center">id</th>
+            <th scope="col" class="text-center">Nombre</th>
+            <th scope="col" class="text-center">Precio</th>
+            <th scope="col" class="text-center">Categoria</th>
+            <th scope="col" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (producto of productos; track producto.id) {
+            <tr>
+              <th scope="row" class="text-center">{{ producto.id }}</th>
+              <td class="text-center">{{ producto.nombre }}</td>
+              <td class="text-center">{{ producto.precio }}</td>
+              <td class="text-center">{{ producto.categoria }}</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  style="margin-right: 10px"
+                  (click)="actualizar(producto)"
+                >
+                  Editar
+                </button>
+                <button type="button" class="btn btn-danger" (click)="eliminar(producto.id)">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
