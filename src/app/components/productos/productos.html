@@ -37,6 +37,15 @@
       <button type="button" class="btn btn-success mt-4" (click)="guardar()">
         {{ enEdicion ? 'Editar' : 'Guardar' }}
       </button>
+      &nbsp;
+      <button
+        type="button"
+        class="btn btn-secondary mt-4"
+        [hidden]="!mostrarBoton"
+        (click)="cancelarEdicion()"
+      >
+        Cancelar
+      </button>
       <table class="table table-bordered table-sm mt-4">
         <thead>
           <tr class="table-active">
@@ -63,7 +72,11 @@
                 >
                   Editar
                 </button>
-                <button type="button" class="btn btn-danger" (click)="eliminar(producto.id)">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="mostrarConfirmacionEliminar(producto)"
+                >
                   Eliminar
                 </button>
               </td>
@@ -71,6 +84,40 @@
           }
         </tbody>
       </table>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center p-4">
+            {{ mensajeModal }}
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="modalEliminar" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            ¿Esta seguro que desea eliminar {{ productoSeleccionado?.nombre }}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="eliminar(productoSeleccionado!.id)"
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
