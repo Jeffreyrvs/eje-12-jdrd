@@ -62,7 +62,7 @@ export class Productos implements OnInit {
         this.productoService.save({
           ...this.producto
         });
-        this.limpiar;
+        this.limpiar();
       }
     } else if (this.producto.nombre.length < 3 && this.producto.precio > 0) {
       this.mensajeModal = 'El nombre debe tener una longitud minima de 3 caracteres.';
@@ -100,6 +100,11 @@ export class Productos implements OnInit {
     this.productoService.delete(id);
     this.listar();
     this.modal.hide();
+    this.mostrarBoton = false;
+    if (this.enEdicion == true) {
+      this.enEdicion = false;
+      this.limpiar();
+    }
   }
 
   mostrarConfirmacionEliminar(productoEliminar: ProductoModel){
